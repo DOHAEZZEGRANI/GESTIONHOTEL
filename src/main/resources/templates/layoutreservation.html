@@ -7,11 +7,145 @@
     <title>Liste des Réservations</title>
     <link rel="stylesheet" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css"/>
     <script type="text/javascript" src="/webjars/bootstrap/5.3.3/js/bootstrap.bundle.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light background color */
+            font-family: 'Arial', sans-serif;
+            padding-top: 20px;
+        }
+
+        .container {
+            background-color: #ffffff; /* White background for the container */
+            color: #343a40; /* Dark text for readability */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #343a40; /* Dark color for headers */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            background-color: #ffffff; /* White background for the table */
+            color: #343a40; /* Dark text in table */
+            border-collapse: collapse;
+        }
+
+        thead th {
+            background-color: brown; /* Primary color for table headers */
+            color: #ffffff; /* White text for table headers */
+            padding: 12px;
+            text-align: center;
+            border-bottom: 2px solid #d6d6d6; /* Light border below headers */
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #f8f9fa; /* Light grey for alternating rows */
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #ffffff; /* White for even rows */
+        }
+
+        tbody tr:hover {
+            background-color: #e9ecef; /* Slightly darker background on hover */
+        }
+
+        td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #dee2e6; /* Light border for table cells */
+        }
+
+        .btn-info, .btn-warning, .btn-danger {
+            background-color: brown; /* Primary color for buttons */
+            color: #ffffff; /* White text for buttons */
+            border: 1px solid brown; /* Primary border color for buttons */
+        }
+
+        .btn-info:hover, .btn-warning:hover, .btn-danger:hover {
+            background-color: #0056b3; /* Darker shade for hover effect */
+            color: #ffffff; /* White text on hover */
+            border: 1px solid #0056b3; /* Darker border on hover */
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            background-image: url('https://wallpapercave.com/wp/wp2888506.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        .cardh {
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            background-image: url('https://i.pinimg.com/originals/ab/90/70/ab9070c3b40ae0e8c1b7521058c26cbf.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        .card-body {
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5); /* Optional for better text readability */
+            border-radius: 10px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            color: #ffffff;
+        }
+
+        .card-text {
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: brown;
+            border-color: brown;
+        }
+
+        .btn-primary:hover {
+            background-color: brown;
+            border-color: brown;
+        }
+
+        .btn-outline-primary {
+            color: #fff;
+            border-color: #28a745;
+            background-color: #28a745;
+        }
+
+        .btn-outline-primary:hover {
+            color: #fff;
+            background-color: brown;
+            border-color: brown;
+        }
+
+        .nav-pills .nav-link {
+            margin: 5px;
+            border-radius: 20px;
+            color: brown;
+        }
+
+        .nav-pills .nav-link.active {
+            background-color: #28a745;
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
 <div layout:fragment="content">
     <div class="container">
-        <h2 class="text-center my-4"> Liste des Réservations</h2>
+      
 
         <table class="table table-striped">
             <thead>
@@ -21,7 +155,7 @@
                 <th>End Date</th>
                 <th>Name</th>
                 <th>Date</th>
-
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -32,14 +166,13 @@
                 <td th:text="${reservation.name}"></td>
                 <td th:text="${reservation.date}"></td>
                 <td>
-                    <a class="btn btn-info"  th:href="@{/detailsreservation(id=${reservation.id})}">Details</a>
-                    <a class="btn btn-warning" sec:authorize="hasAnyRole('admin','managetable')"  th:href="@{/editreservation(id=${reservation.id})}">Edit</a>
-                    <a class="btn btn-danger" sec:authorize="hasAnyRole('admin','managetable')"  th:href="@{/deletereservation(id=${reservation.id})}" onclick="return confirm('Are you sure?')">Delete</a>
+                    <a class="btn btn-info" th:href="@{/detailsreservation(id=${reservation.id})}">Details</a>
+                    <a class="btn btn-warning" sec:authorize="hasAnyRole('admin','managetable')" th:href="@{/editreservation(id=${reservation.id})}">Edit</a>
+                    <a class="btn btn-danger" sec:authorize="hasAnyRole('admin','managetable')" th:href="@{/deletereservation(id=${reservation.id})}" onclick="return confirm('Are you sure?')">Delete</a>
                 </td>
             </tr>
             </tbody>
         </table>
-
     </div>
 </div>
 </body>

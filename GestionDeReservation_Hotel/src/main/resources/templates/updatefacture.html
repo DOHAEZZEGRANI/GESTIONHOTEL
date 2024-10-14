@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier Facture</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css">
+</head>
+<body>
+<h1>Modifier Facture</h1>
+<form method="post" th:action="@{/ajouterf}">
+    <input type="hidden" th:field="${FactureToBeUpdated.id}" />
+    <label>Description: <input type="text" th:field="${FactureToBeUpdated.description}" /></label><br/>
+    <label>Totale: <input type="text" th:field="${FactureToBeUpdated.totale}" /></label><br/>
+    <button type="submit">Modifier</button>
+</form>
+</body>
+</html>

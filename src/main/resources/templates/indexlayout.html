@@ -6,7 +6,15 @@
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css"/>
     <script src="/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
     <style>
-        /* Styles CSS personnalisés */
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            background-image: url('https://wallpapercave.com/wp/wp2888506.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
         body {
             background-color: #f8f9fa;
             font-family: 'Arial', sans-serif;
@@ -14,10 +22,7 @@
         }
 
         .container {
-            border-radius: 10px;
             padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
@@ -26,60 +31,61 @@
             margin-bottom: 20px;
         }
 
+        .cardh {
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            background-image: url('https://i.pinimg.com/originals/ab/90/70/ab9070c3b40ae0e8c1b7521058c26cbf.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        .card-body {
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5); /* Optional for better text readability */
+            border-radius: 10px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            color: #ffffff;
+        }
+
+        .card-text {
+            font-size: 1rem;
+        }
+
         .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
+            background-color: brown;
+            border-color: brown;
         }
 
         .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
-        }
-        .nom-colonne {
-            color: red;
+            background-color: brown;
+            border-color: brown;
         }
 
         .btn-outline-primary {
-            color: #007bff;
-            border-color: #007bff;
+            color: #fff;
+            border-color: #28a745;
+            background-color:#28a745  ;
         }
 
         .btn-outline-primary:hover {
-            background-color: #007bff;
             color: #fff;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            border: 1px solid #dee2e6; /* ajout d'une bordure autour du tableau */
-        }
-
-        th, td {
-            border: 1px solid #dee2e6; /* ajout d'une bordure autour des cellules */
-            padding: 10px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #007bff;
-            color: #fff;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        tr {
-            background-color: #fff; /* couleur de fond des lignes du tableau */
+            background-color: brown;
+            border-color: brown;
         }
 
         .nav-pills .nav-link {
             margin: 5px;
             border-radius: 20px;
-            color: #007bff;
+            color: brown;
         }
 
         .nav-pills .nav-link.active {
-            background-color: #007bff;
+            background-color: #28a745;
             color: #fff;
         }
     </style>
@@ -96,32 +102,24 @@
             </button>
         </form>
     </div>
+
     <div class="container">
-        <h1>Liste Des Hôtels</h1>
-        <table class="table  table-hover">
-            <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Adresse</th>
-                <th>Téléphone</th>
-                <th>Email</th>
-                <th>Description</th>
-                <th>Chambres</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="p: ${listHotel}">
-                <td th:text="${p.getName()}"></td>
-                <td th:text="${p.getAddress()}"></td>
-                <td th:text="${p.getPhone()}"></td>
-                <td th:text="${p.getEmail()}"></td>
-                <td th:text="${p.getDescription()}"></td>
-                <td>
-                    <a th:href="@{details(id=${p.getId()})}" class="btn btn-outline-primary">Détails des Chambres</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="row">
+            <div class="col-md-4" th:each="p: ${listHotel}">
+                <div class="cardh">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${p.getName()}"></h5>
+                        <p class="card-text">
+                            <strong>Adresse:</strong> <span th:text="${p.getAddress()}"></span><br/>
+                            <strong>Téléphone:</strong> <span th:text="${p.getPhone()}"></span><br/>
+                            <strong>Email:</strong> <span th:text="${p.getEmail()}"></span><br/>
+                            <strong>Description:</strong> <span th:text="${p.getDescription()}"></span>
+                        </p>
+                        <a th:href="@{details(id=${p.getId()})}" class="btn btn-outline-primary">Détails des Chambres</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="d-flex justify-content-center mt-4">
             <ul class="nav nav-pills">

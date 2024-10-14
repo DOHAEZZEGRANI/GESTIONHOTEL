@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="templates" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier un client</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css">
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header">Modifier Client</div>
+            <div class="card-body">
+                <form action="/ajouter" method="post">
+                    <input type="hidden" name="id" th:value="${CustomerToBeUpdated.id}">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" th:value="${CustomerToBeUpdated.name}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">phone</label>
+                        <input type="text" class="form-control" id="phone" name="phone" th:value="${CustomerToBeUpdated.phone}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <input type="text" class="form-control" id="description" name="description" th:value="${CustomerToBeUpdated.description}">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Modifier</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

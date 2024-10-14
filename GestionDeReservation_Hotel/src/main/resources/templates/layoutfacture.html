@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Factures</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css">
+</head>
+<body>
+<h1>Liste des Factures</h1>
+<table class="table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Description</th>
+        <th>Totale</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="facture : ${listFacture}">
+        <td><a th:href="@{/detailsfacture(id=${facture.id})}" th:text="${facture.id}"></a></td>
+        <td th:text="${facture.description}"></td>
+        <td th:text="${facture.totale}"></td>
+    </tr>
+    </tbody>
+</table>
+<ul class="pagination">
+    <li th:each="pageNumber : ${pages}" th:class="${pageNumber == page ? 'page-item active' : 'page-item'}">
+        <a class="page-link" th:href="@{/listfacture(page=${pageNumber}, taille=${taille}, search=${keyword})}" th:text="${pageNumber}"></a>
+    </li>
+</ul>
+</body>
+</html>

@@ -6,30 +6,38 @@
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css"/>
     <script src="/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
     <style>
+        /* Full-screen background */
         body {
-            background-color: #f8e1f5; /* Light pink background color */
-            font-family: 'Arial', sans-serif; /* Use a common font */
-            padding-top: 20px;
+            background-image: url('https://wallpapercave.com/wp/wp2888506.jpg'); /* Background image from first theme */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+            color: white;
         }
 
         .container {
-            margin-top: 50px; /* Adjust as needed */
-            border: 1px solid #111827; /* Soft pink border */
-            border-radius: 10px; /* Rounded corners for container */
-            padding: 20px; /* Add padding inside container */
-            background-color: #fff; /* White background */
-            max-width: 500px; /* Max width for container */
-            margin: 50px auto; /* Center align the container */
+            background-color: rgba(0, 0, 0, 0.7); /* Transparent black background from first theme */
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 800px;
+            width: 150%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        h1 {
-            color: #751A3D; /* Light purple heading color */
+        h2 {
+            color: #ffffff; /* White heading color from first theme */
             text-align: center;
             margin-bottom: 20px;
         }
 
         p {
-            color: #111827; /* Light purple paragraph color */
+            color: #f3f3f3; /* Light text for contrast */
             margin-bottom: 10px;
         }
 
@@ -37,10 +45,6 @@
             color: #fff; /* White text color */
             font-weight: bold; /* Bold text */
             transition: background-color 0.3s; /* Smooth transition */
-        }
-
-        .btn:hover {
-            color: #fff; /* White text color on hover */
         }
 
         .btn-success {
@@ -73,16 +77,6 @@
             border-color: #0056b3; /* Darker blue button border color on hover */
         }
 
-        .btn-block {
-            display: block;
-            width: 100%;
-        }
-
-        .btn svg {
-            margin-right: 5px;
-        }
-
-        /* Centered button */
         .center-button {
             display: flex;
             justify-content: center;
@@ -98,8 +92,7 @@
         <p>Price Per Night: <span th:text="${RoomWithDetails.pricePerNight}"></span></p>
         <p>Availability: <span th:text="${RoomWithDetails.available ? 'Available' : 'Not available'}"></span></p>
         <p>Description: <span th:text="${RoomWithDetails.description}"></span></p>
-        <p>RoomTypes: <span th:text="${RoomWithDetails.roomType}"></span></p>
-
+        <p>Room Types: <span th:text="${RoomWithDetails.roomType}"></span></p>
 
         <div class="row">
             <div class="col-md-6">

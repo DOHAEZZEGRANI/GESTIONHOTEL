@@ -37,11 +37,27 @@ public class HotelController {
             return "about";
         }
 
+
+
+    @GetMapping("hello")
+    public String hello() {
+        return "redirect:/indexpage";}
+
+
     @GetMapping("")
-    public String accu() {
-        return "redirect:/indexpage";
+    public String av() {
+        return "hello";
+
+    } @GetMapping("welcome")
+    public String welcome() {
+        return "welcome";
+
     }
 
+
+    @GetMapping("/login")
+    public String login() {
+        return "login"; }
 
 
 

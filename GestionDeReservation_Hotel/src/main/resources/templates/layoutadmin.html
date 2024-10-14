@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="templates" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Liste des admins</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css"/>
+    <script src="/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="d-flex justify-content-center">
+        <form method="get" th:action="@{listadmin}">
+            <label>
+                <input type="text" name="search" th:value="${keyword}"/>
+            </label>
+            <button class="btn btn-primary" type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                </svg>
+            </button>
+        </form>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p: ${listAdmin}">
+            <td><a th:href="@{detailsadmin(id=${p.getId()})}" th:text="${p.getId()}"></a></td>
+            <td th:text="${p.getName()}"></td>
+            <td th:text="${p.getPhone()}"></td>
+            <td th:text="${p.getDescription()}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="container">
+        <ul class="nav nav-pills">
+            <li class="nav-item me-2" th:each="p, stat: ${pages}">
+                <a th:class="${stat.index} == ${page} ? 'btn btn-primary' : 'btn btn-outline-primary'"
+                   th:text="${stat.index}" th:href="@{listadmin(page=${stat.index},search=${keyword})}"></a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

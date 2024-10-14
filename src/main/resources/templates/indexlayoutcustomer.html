@@ -8,9 +8,11 @@
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css"/>
     <script src="/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
     <style>
-        /* Styles CSS personnalisés */
+        /* Background setup */
         body {
-            background-color: #f8f9fa;
+            background-image: url('https://wallpapercave.com/wp/wp2888506.jpg');
+            background-size: cover;
+            background-position: center;
             font-family: 'Arial', sans-serif;
             padding-top: 20px;
         }
@@ -18,8 +20,8 @@
         .container {
             border-radius: 10px;
             padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.85); /* Slightly transparent background for readability */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
         }
 
         h1 {
@@ -28,63 +30,93 @@
             margin-bottom: 20px;
         }
 
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
-        }
-        .nom-colonne {
-            color: red;
-        }
-
-        .btn-outline-primary {
-            color: #007bff;
-            border-color: #007bff;
-        }
-
-        .btn-outline-primary:hover {
-            background-color: #007bff;
-            color: #fff;
-        }
-
+        /* Table Design */
         table {
-            border-collapse: collapse;
             width: 100%;
-            border: 1px solid #dee2e6; /* ajout d'une bordure autour du tableau */
-        }
-
-        th, td {
-            border: 1px solid #dee2e6; /* ajout d'une bordure autour des cellules */
-            padding: 10px;
-            text-align: left;
+            border-collapse: separate;
+            border-spacing: 0 15px;
+            color: #343a40;
         }
 
         th {
-            background-color: #007bff;
-            color: #fff;
+            background-color: #28a745;
+            color: white;
             font-weight: bold;
             text-transform: uppercase;
+            padding: 10px;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+        }
+
+        td {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            text-align: center;
+            border: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
         }
 
         tr {
-            background-color: #fff; /* couleur de fond des lignes du tableau */
+            transition: transform 0.2s ease;
+            cursor: pointer;
         }
 
+        /* Hover effect for rows */
+        tr:hover {
+            transform: scale(1.02);
+            background-color: rgba(240, 240, 240, 0.9);
+        }
+
+        /* Making rows clickable */
+        tr a {
+            display: block;
+            color: inherit;
+            text-decoration: none;
+            height: 100%;
+            width: 100%;
+        }
+
+        /* Pagination pills styling */
         .nav-pills .nav-link {
             margin: 5px;
             border-radius: 20px;
-            color: #007bff;
+            color: brown;
+            background-color: #f8f9fa;
+            border: 1px solid brown;
         }
 
         .nav-pills .nav-link.active {
-            background-color: #007bff;
+            background-color: #28a745;
             color: #fff;
+            border-color: #28a745;
+        }
+
+        .btn-primary {
+            background-color: brown;
+            border-color: brown;
+        }
+
+        .btn-primary:hover {
+            background-color: darkred;
+            border-color: darkred;
         }
     </style>
+    <script>
+        // Make the whole row clickable
+        document.addEventListener('DOMContentLoaded', function () {
+            const rows = document.querySelectorAll('table tbody tr');
+            rows.forEach(row => {
+                row.addEventListener('click', function () {
+                    const link = this.querySelector('a');
+                    if (link) {
+                        window.location.href = link.href;
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 <body>
 <div layout:fragment="content">

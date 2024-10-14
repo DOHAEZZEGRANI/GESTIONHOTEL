@@ -6,46 +6,112 @@
     <title>About Us - Hotel Reservation</title>
     <style>
         body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #ffd6e7; /* Light Pink */
+            background-color: #f8f9fa; /* Light background color */
         }
 
         .container {
             max-width: 800px;
             margin: 20px auto;
             padding: 20px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: #343a40; /* Dark text for readability */
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            background-image:
+                    url('https://wallpapercave.com/wp/wp2888506.jpg'), /* Background image */
+                    linear-gradient(to right, #f0f4f8, #ffffff); /* Gradient */
+            background-size: cover, cover; /* Ensure both are sized correctly */
+            background-blend-mode: overlay; /* Blend the gradient with the image */
         }
 
         h1 {
-            color: #ff6b81; /* Pink */
+            color: #495057; /* Slightly lighter dark color for headers */
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 3em; /* Larger font size for the main heading */
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            letter-spacing: 1px;
         }
 
         p {
-            line-height: 1.6;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1.2em; /* Slightly larger font size for better readability */
+            text-align: justify; /* Justify text for a cleaner look */
+            color: #495057; /* Darker color for improved contrast */
         }
 
-        ul {
-            color: #ff6b81; /* Pink */
+
+
+        .image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .image-gallery .image-card {
+            flex: 1;
+            min-width: calc(50% - 20px); /* Adjusts to two images per row with spacing */
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: #f8f9fa; /* Light background for image cards */
+        }
+
+        .image-gallery .image-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .image-gallery img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .image-gallery .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .image-gallery .image-card:hover .caption {
+            opacity: 1;
         }
     </style>
 </head>
 <body>
 <div class="container" layout:fragment="content">
     <h1>About Us - Hotel Reservation</h1>
-    <p>Welcome to Hotel Reservation, your premier destination for finding the perfect accommodations for your travels.</p>
-    <p>Our mission is to provide a seamless booking experience, offering a wide range of hotels with available rooms to reserve. Whether you're seeking a cozy room for a solo adventure or a spacious suite for a family vacation, we have options to suit every traveler's needs.</p>
-    <p>With Hotel Reservation, you can easily browse through various hotels, explore available room types, and securely reserve your preferred accommodation online. Our platform ensures convenience and reliability throughout the booking process.</p>
-    <p>Whether you're planning a spontaneous getaway or a meticulously organized trip, we're here to assist you in finding the ideal lodging. Our dedicated team works tirelessly to ensure that your stay is comfortable, enjoyable, and tailored to your preferences.</p>
-    <p>Thank you for choosing Hotel Reservation. We look forward to helping you create unforgettable memories on your next journey!</p>
+    <div class="image-gallery">
+        <div class="image-card">
+            <img src="https://image-tc.galaxy.tf/wijpeg-6rc902e9t312jljywldrat8xl/york-pool-dusk-ok.jpg" alt="Hotel Pool at Dusk">
+            <div class="caption">Hotel Pool at Dusk</div>
+        </div>
+        <div class="image-card">
+            <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/ed/95/07/limak-eurasia-luxury.jpg?w=700&h=-1&s=1" alt="Luxury Hotel">
+            <div class="caption">Luxury Hotel</div>
+        </div>
+    </div>
+    <p>Welcome to Hotel Reservation, your trusted partner in finding the perfect place to stay. Our mission is to provide a hassle-free booking experience and to offer a wide variety of accommodations to suit every traveler's needs.</p>
+    <p>We pride ourselves on our extensive network of hotels, which includes everything from budget-friendly options to luxurious retreats. Our goal is to make your travel planning as seamless and enjoyable as possible.</p>
+    <p>Our dedicated team is always here to assist you with your booking, answer any questions you may have, and ensure that your stay is comfortable and memorable. We are committed to providing exceptional service and making sure that every guest has a fantastic experience.</p>
 </div>
-<!-- Keep the navbar and footer -->
-<footer layout:fragment="footer">
-    <p>&copy; 2024 Hotel Reservation. All rights reserved.</p>
-</footer>
+
 </body>
 </html>

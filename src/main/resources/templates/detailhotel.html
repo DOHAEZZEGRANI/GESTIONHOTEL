@@ -6,6 +6,17 @@
     <title>Hotel Details</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css">
     <style>
+        /* Ajouter un arrière-plan similaire */
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+            padding-top: 20px;
+            background-image: url('https://wallpapercave.com/wp/wp2888506.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
         /* Styles spécifiques */
         .room-card {
             margin-bottom: 20px;
@@ -15,43 +26,53 @@
             text-align: center;
             margin-top: 30px;
         }
-
         .hotel-name {
-            text-align: center; /* Centrer le texte */
-            color: #750049; /* Couleur rouge pour le texte */
-            font-size: 2rem; /* Taille de police */
-            margin-bottom: 20px; /* Ajouter un peu de marge en bas */
-            font-weight: bold; /* Mettre le texte en gras */
+            text-align: center;
+            color: #ad881f; /* Deep magenta for a rich look */
+            font-size: 2.5rem; /* Slightly larger for more impact */
+            margin-bottom: 1.5rem; /* Reduced margin for a more compact layout */
+            font-weight: 700; /* Bold font weight for stronger emphasis */
+            line-height: 1.2; /* Adjusted line height for better readability */
+            letter-spacing: 0.05em; /* Adds a bit of spacing between letters for a polished look */
+            text-transform: uppercase; /* Optional: capitalizes text for a more formal feel */
+            font-family: 'Arial', sans-serif; /* Ensures a clean and modern appearance */
         }
 
+
         .room-card {
-            margin-bottom: 10px; /* Réduire la marge inférieure */
-            padding: 10px; /* Ajouter un peu de rembourrage */
+            margin-bottom: 10px;
+            padding: 10px;
         }
 
         .center-button {
             text-align: center;
-            margin-top: 20px; /* Réduire la marge supérieure */
+            margin-top: 20px;
         }
 
         .card {
-            /* Ajoutez vos styles de carte ici */
-            background-color: #fff; /* Couleur de fond */
-            border: 1px solid rgba(0, 0, 0, 0.125); /* Bordure */
-            border-radius: 0.25rem; /* Rayon de bordure */
-            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); /* Ombre */
+            background-color: rgba(0, 0, 0, 0.5); /* Fond noir transparent */
+            border: 1px solid rgba(0, 0, 0, 0.125);
+            border-radius: 0.25rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
         }
 
         .card-title {
-            /* Styles pour le titre de la carte */
-            font-size: 1.25rem; /* Taille de police */
-            margin-bottom: 0.75rem; /* Marge inférieure */
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
         }
 
         .card-text {
-            /* Styles pour le texte de la carte */
-            font-size: 1rem; /* Taille de police */
-            color: #6c757d; /* Couleur du texte */
+            font-size: 1rem;
+            color: white;
+        }
+
+        .btn-primary {
+            background-color: brown;
+            border-color: brown;
+        }
+
+        .btn-primary:hover {
+            background-color: #8b4513; /* Couleur sur hover */
         }
     </style>
 </head>
@@ -65,12 +86,19 @@
                 <div class="card room-card">
                     <img th:src="${room.imageUrl}" class="card-img-top" alt="Room Image">
                     <div class="card-body">
-                        <h5 class="card-title">Room ID: <span th:text="${room.id}"></span></h5>
-                        <p class="card-text">Room Number: <span th:text="${room.roomNumber}"></span></p>
-                        <p class="card-text">Price: <span th:text="${room.pricePerNight}"></span> per night</p>
-                        <p class="card-text">Available: <span th:text="${room.available}"></span></p>
+                        <p class="card-text">Room Number: <span th:text="${room.roomNumber}" class="fw-bold"></span></p>
+                        <p class="card-text">Price: <span th:text="${room.pricePerNight}"class="fw-bold"></span> per night</p>
+                        <p class="card-text">
+                            <span th:text="${room.available ? 'Available' : 'Not Available'}"
+                                  th:classappend="${room.available ? 'text-success fw-bold' : 'text-danger fw-bold'}"></span>
+                        </p>
                         <p class="card-text">Description: <span th:text="${room.description}"></span></p>
-                        <p class="card-text">Room Type: <span th:text="${room.roomType}"></span></p>
+                        <p class="card-text">
+                            Room Type:
+                            <span th:text="${room.roomType}" class="fw-bold"
+                                  th:style="${room.roomType == 'VIP' ? 'color: #b8860b; font-weight: bold;' : ''}"></span>
+                        </p>
+
                         <div class="row">
                             <div sec:authorize="hasAnyRole('admin','managetable')" class="col-md-4">
                                 <a class="btn btn-success btn-block" onclick="return confirm('Are you sure you want to edit this room?');"
@@ -90,10 +118,9 @@
                                 </a>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-4" th:if="${room.available}">
                                 <a class="btn btn-primary btn-block" th:href="@{/ajouterreservation(id=${room.id})}">Réserver</a>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -103,16 +130,27 @@
     <div th:if="${hotelWithDetails.rooms == null}">
         <p>No rooms available for this hotel.</p>
     </div>
-    <div sec:authorize="hasAnyRole('admin','managetable')" class="col-md-4">
-        <a class="btn btn-danger btn-block" onclick="return confirm('Are you sure you want to delete this hotel?');"
+    <div>
+        <a class="btn btn-danger btn-block"
+           onclick="return confirm('Are you sure you want to delete this hotel?');"
            th:href="@{delete(id=${hotelWithDetails.id})}">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                 <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
                 <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-            </svg>Delete hotel
+            </svg>
+            Delete Hotel
         </a>
-    </div>
 
+        <a class="btn btn-success btn-block"
+           onclick="return confirm('Are you sure you want to edit this hotel?');"
+           th:href="@{editHotel(id=${hotelWithDetails.id})}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
+            </svg>
+            Edit Hotel
+        </a>
+
+    </div>
     <div class="center-button">
         <a class="btn btn-primary mt-3" th:href="@{/indexpage}">Go to Hotel List</a>
     </div>

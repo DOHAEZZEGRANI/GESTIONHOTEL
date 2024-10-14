@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="templates" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier un hôtel</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="p-3 m-2">
+        <div class="card">
+            <div class="card-header">Modifier Hôtel</div>
+            <div class="card-body">
+                <form action="/ajouterh" method="post">
+                    <input type="hidden" id="id" name="id" th:value="${HotelToBeUpdated.id}">
+                    <div class="form-group">
+                        <label for="name">Nom:</label>
+                        <input type="text" id="name" name="name" class="form-control" th:value="${HotelToBeUpdated.name}">
+                    </div>
+                    <div class="form-group">
+                        <label for="adresse">Adresse:</label>
+                        <input type="text" id="adresse" name="adresse" class="form-control" th:value="${HotelToBeUpdated.address}">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Téléphone:</label>
+                        <input type="text" id="phone" name="phone" class="form-control" th:value="${HotelToBeUpdated.phone}">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" class="form-control" th:value="${HotelToBeUpdated.email}">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description:</label>
+                        <input type="text" id="description" name="description" class="form-control" th:value="${HotelToBeUpdated.description}">
+                    </div>
+                    <br>
+                    <input type="submit" class="btn btn-primary form-control" value="Modifier">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

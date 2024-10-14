@@ -8,11 +8,13 @@ import java.util.List;
 
 public interface ReservationService {
     List<Reservation> getAllReservation();
+
     Reservation addReservation(Reservation reservation);
     Reservation updateReservation(Reservation reservation);
     Boolean deleteReservation(Reservation reservation);
     Reservation getReservationById(Integer id);
     Boolean deleteReservationById(Integer id);
+
 
     public List<Reservation> searchReservation();
 }

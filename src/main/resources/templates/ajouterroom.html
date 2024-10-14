@@ -1,62 +1,113 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.com"
-xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-layout:decorate="templates" lang="en">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="templates" lang="en">
 <head>
     <meta charset="utf-8"/>
     <title>Ajouter une chambre</title>
     <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.3.3/css/bootstrap.min.css"/>
     <script src="webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            background-image: url('https://wallpapercave.com/wp/wp2888506.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+            padding-top: 20px;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        h1 {
+            color: #343a40;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .card-body {
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5); /* Optional for better text readability */
+            border-radius: 10px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            color: #ffffff;
+        }
+
+        .btn-primary {
+            background-color: brown;
+            border-color: brown;
+        }
+
+        .btn-primary:hover {
+            background-color: brown;
+            border-color: brown;
+        }
+    </style>
 </head>
 <body>
 <div layout:fragment="content">
     <div class="container" align="center">
         <div class="col-md-6">
-            <h1 class="text-center mb-4">Ajouter Chambre</h1>
-            <form action="/ajouterroom" method="post" th:object="${room}">
-                <div class="mb-3">
-                    <label for="roomNumber" class="form-label">Numéro de chambre</label>
-                    <input type="text" class="form-control w-50" id="roomNumber" name="roomNumber">
-                    <span class="text-danger" th:errors="${room.roomNumber}"></span>
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title text-center mb-4">Ajouter Chambre</h1>
+                    <form action="/ajouterroom" method="post" th:object="${room}">
+                        <div class="mb-3">
+                            <label for="roomNumber" class="form-label">Numéro de chambre</label>
+                            <input type="text" class="form-control w-50" id="roomNumber" name="roomNumber">
+                            <span class="text-danger" th:errors="${room.roomNumber}"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="hotel" class="form-label">Hôtel</label>
+                            <select class="form-select w-50" id="hotel" name="hotel" th:field="*{hotel.id}">
+                                <option th:each="hotel : ${hotel}" th:value="${hotel.id}" th:text="${hotel.name}"></option>
+                            </select>
+                            <span class="text-danger" th:if="${#fields.hasErrors('hotel')}" th:errors="*{hotel}"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="pricePerNight" class="form-label">Prix par nuit</label>
+                            <input type="number" class="form-control w-50" id="pricePerNight" name="pricePerNight" th:field="*{pricePerNight}">
+                            <span class="text-danger" th:if="${#fields.hasErrors('pricePerNight')}" th:errors="*{pricePerNight}"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control w-50" id="description" name="description" th:field="*{description}"></textarea>
+                            <span class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="imageUrl" class="form-label">URL de l'image</label>
+                            <input type="text" class="form-control w-50" id="imageUrl" name="imageUrl">
+                        </div>
+                        <div class="mb-3">
+                            <label for="roomType" class="form-label">Type de chambre</label>
+                            <select class="form-select w-50" id="roomType" name="roomType" th:field="*{roomType}">
+                                <option value="SINGLE">Single</option>
+                                <option value="DOUBLE">Double</option>
+                                <option value="VIP">VIP</option>
+                            </select>
+                            <span class="text-danger" th:if="${#fields.hasErrors('roomType')}" th:errors="*{roomType}"></span>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="available" name="available" th:field="*{available}">
+                            <label class="form-check-label" for="available">Disponible</label>
+                            <span class="text-danger" th:if="${#fields.hasErrors('available')}" th:errors="*{available}"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary form-control w-50" value="Ajouter">Ajouter</button>
+                    </form>
                 </div>
-                <div class="mb-3">
-                    <label for="hotel" class="form-label">Hôtel</label>
-                    <select class="form-select w-50" id="hotel" name="hotel" th:field="*{hotel.id}">
-                        <option th:each="hotel : ${hotel}" th:value="${hotel.id}" th:text="${hotel.name}"></option>
-                    </select>
-                    <span class="text-danger" th:if="${#fields.hasErrors('hotel')}" th:errors="*{hotel}"></span>
-                </div>
-                <div class="mb-3">
-                    <label for="pricePerNight" class="form-label">Prix par nuit</label>
-                    <input type="number" class="form-control w-50" id="pricePerNight" name="pricePerNight" th:field="*{pricePerNight}">
-                    <span class="text-danger" th:if="${#fields.hasErrors('pricePerNight')}" th:errors="*{pricePerNight}"></span>
-                </div>
-                <div class="mb-3">
-                    <label for="description" class="form-label">Description</label>
-                    <textarea class="form-control w-50" id="description" name="description" th:field="*{description}"></textarea>
-                    <span class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
-                </div>
-                <div class="mb-3">
-                    <label for="imageUrl" class="form-label">URL de l'image</label>
-                    <input type="text" class="form-control w-50" id="imageUrl" name="imageUrl">
-
-                </div>
-                <div class="mb-3">
-                    <label for="roomType" class="form-label">Type de chambre</label>
-                    <select class="form-select w-50" id="roomType" name="roomType" th:field="*{roomType}">
-                        <option value="SINGLE">Single</option>
-                        <option value="DOUBLE">Double</option>
-                        <option value="VIP">VIP</option>
-                    </select>
-                    <span class="text-danger" th:if="${#fields.hasErrors('roomType')}" th:errors="*{roomType}"></span>
-                </div>
-                <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="available" name="available" th:field="*{available}">
-                    <label class="form-check-label" for="available">Disponible</label>
-                    <span class="text-danger" th:if="${#fields.hasErrors('available')}" th:errors="*{available}"></span>
-                </div>
-                <button type="submit" class="btn btn-primary form-control w-50" value="Ajouter">Ajouter</button>
-            </form>
+            </div>
         </div>
     </div>
 </div>

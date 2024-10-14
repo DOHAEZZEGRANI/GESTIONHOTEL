@@ -17,13 +17,20 @@ public class Room {
     private Integer id;
     private String roomNumber;
     private Double pricePerNight;
-    private Boolean available;
+    private Boolean available=false;
     private String description;
     private String roomType;
     public String imageUrl;
     @ManyToOne
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
 
 
 

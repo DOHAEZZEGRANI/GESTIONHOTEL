@@ -5,71 +5,73 @@
     <title>Admin Details</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css">
     <style>
+        /* Make background image cover entire screen */
         body {
-            background-color: #f8e1f5; /* Light pink background color */
-            font-family: 'Arial', sans-serif; /* Use a common font */
-            padding-top: 20px;
+            background-image: url('https://wallpapercave.com/wp/wp2888506.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-family: 'Arial', sans-serif;
         }
 
         .container {
-            margin-top: 50px; /* Adjust as needed */
-            border: 1px solid #111827; /* Soft pink border */
-            border-radius: 10px; /* Rounded corners for container */
-            padding: 20px; /* Add padding inside container */
-            background-color: #fff; /* White background */
-            max-width: 500px; /* Max width for container */
-            margin: 50px auto; /* Center align the container */
+            background-color: rgba(0, 0, 0, 0.7); /* Transparent black background */
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 100%; /* Ensures it is responsive */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Soft shadow */
         }
 
         h1 {
-            color: #751A3D; /* Light purple heading color */
             text-align: center;
             margin-bottom: 20px;
         }
 
         p {
-            color: #111827; /* Light purple paragraph color */
             margin-bottom: 10px;
         }
 
         .btn {
-            color: #fff; /* White text color */
-            font-weight: bold; /* Bold text */
-            transition: background-color 0.3s; /* Smooth transition */
+            font-weight: bold;
+            transition: background-color 0.3s;
         }
 
         .btn:hover {
-            color: #fff; /* White text color on hover */
+            color: white;
         }
 
         .btn-success {
-            background-color: #28a745; /* Green button background color */
-            border-color: #28a745; /* Green button border color */
+            background-color: #28a745;
+            border-color: #28a745;
         }
 
         .btn-success:hover {
-            background-color: #218838; /* Darker green button background color on hover */
-            border-color: #1e7e34; /* Darker green button border color on hover */
+            background-color: #218838;
         }
 
         .btn-danger {
-            background-color: #dc3545; /* Red button background color */
-            border-color: #dc3545; /* Red button border color */
+            background-color: #dc3545;
+            border-color: #dc3545;
         }
 
         .btn-danger:hover {
-            background-color: #c82333; /* Darker red button background color on hover */
-            border-color: #bd2130; /* Darker red button border color on hover */
+            background-color: #c82333;
         }
 
         .btn-primary {
-            background-color: #007bff; /* Blue button background color */
-            border-color: #007bff; /* Blue button border color */
+            background-color: #007bff;
+            border-color: #007bff;
         }
 
         .btn-primary:hover {
-            background-color: #0056b3; /* Darker blue button background color on hover */
-            border-color: #0056b3; /* Darker blue button border color on hover */
+            background-color: #0056b3;
         }
 
         .btn-block {
@@ -77,11 +79,6 @@
             width: 100%;
         }
 
-        .btn svg {
-            margin-right: 5px;
-        }
-
-        /* Centered button */
         .center-button {
             display: flex;
             justify-content: center;
@@ -90,51 +87,29 @@
 </head>
 <body>
 <div class="container">
-<h1>Admin Details</h1>
-<p>ID: <span th:text="${AdminWithDetails.id}"></span></p>
-<p>Name: <span th:text="${AdminWithDetails.name}"></span></p>
-<p>Phone: <span th:text="${AdminWithDetails.phone}"></span></p>
-<p>Description: <span th:text="${AdminWithDetails.description}"></span></p>
+    <h1>Admin Details</h1>
+    <p>ID: <span th:text="${AdminWithDetails.id}"></span></p>
+    <p>Name: <span th:text="${AdminWithDetails.name}"></span></p>
+    <p>Phone: <span th:text="${AdminWithDetails.phone}"></span></p>
+    <p>Description: <span th:text="${AdminWithDetails.description}"></span></p>
 
-<div class="row">
-    <div class="col-md-6">
-        <a class="btn btn-success btn-block" onclick="return confirm('Are you sure you want to edit this admin?');"
-           th:href="@{editadmin(id=${AdminWithDetails.id})}">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil"
-                 viewBox="0 0 16 16">
-                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5
-                    0 0 1-.168.11l-5 2a.5.5
-                    0 0 1-.65-.65l2-5a.5.5
-                    0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5
-                    1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1
-                    .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-
-                    1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-
-                    .5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
-            </svg>
-            Edit
-        </a>
-    </div>
-    <div class="col-md-6">
-        <a class="btn btn-danger btn-block" onclick="return confirm('Are you sure you want to delete this admin?');"
-           th:href="@{deleteAdmin(id=${AdminWithDetails.id})}">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash"
-                 viewBox="0 0 16 16">
-                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5
-                    0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5
-                    0 0 0 1 0z"/>
-                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1
-                    0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1
-                    1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5
-                    3h11V2h-11z"/>
-            </svg>
-            Delete
-        </a>
-    </div>
-    <div class="center-button">
-        <a class="btn btn-primary mt-3" th:href="@{/listadmin}">Go to Admin List</a>
+    <div class="row">
+        <div class="col-md-6">
+            <a class="btn btn-success btn-block" onclick="return confirm('Are you sure you want to edit this admin?');"
+               th:href="@{editadmin(id=${AdminWithDetails.id})}">
+                Edit
+            </a>
+        </div>
+        <div class="col-md-6">
+            <a class="btn btn-danger btn-block" onclick="return confirm('Are you sure you want to delete this admin?');"
+               th:href="@{deleteAdmin(id=${AdminWithDetails.id})}">
+                Delete
+            </a>
+        </div>
+        <div class="center-button">
+            <a class="btn btn-primary mt-3" th:href="@{/listadmin}">Go to Admin List</a>
+        </div>
     </div>
 </div>
-</div>
-
 </body>
 </html>

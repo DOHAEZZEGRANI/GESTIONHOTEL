@@ -7,50 +7,85 @@
     <title>Ajouter Page</title>
     <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.3.3/css/bootstrap.min.css"/>
     <script src="webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            background-image: url('https://wallpapercave.com/wp/wp2888506.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+            padding-top: 20px;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        h1 {
+            color: #343a40;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .card-body {
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5); /* Optional for better text readability */
+            border-radius: 10px;
+        }
+
+        .btn-primary {
+            background-color: brown;
+            border-color: brown;
+        }
+
+        .btn-primary:hover {
+            background-color: brown;
+            border-color: brown;
+        }
+    </style>
 </head>
 <body>
 <div layout:fragment="content">
     <div class="container" align="center">
         <div class="col-md-6">
-            <h1 class="text-center mb-4">Ajouter Page</h1>
-            <form action="/ajouterrOnce" method="post">
-                <div class="mb-3">
-                    <label for="startDate" class="form-label">Start Date</label>
-                    <input type="date" class="form-control w-50" id="startDate" name="startDate">
-                    <!-- Thymeleaf validation errors -->
-                    <span class="text-danger" th:errors="${reservation.startDate}"></span>
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="text-center mb-4">Ajouter Page</h1>
+                    <form action="/ajouterrOnce" method="post">
+                        <div class="mb-3">
+                            <label for="startDate" class="form-label">Start Date</label>
+                            <input type="date" class="form-control w-50" id="startDate" name="startDate">
+                            <span class="text-danger" th:errors="${reservation.startDate}"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="endDate" class="form-label">End Date</label>
+                            <input type="date" class="form-control w-50" id="endDate" name="endDate">
+                            <span class="text-danger" th:errors="${reservation.endDate}"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control w-50" id="name" name="name">
+                            <span class="text-danger" th:errors="${reservation.name}"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="date" class="form-label">Date</label>
+                            <input type="date" class="form-control w-50" id="date" name="date">
+                            <span class="text-danger" th:errors="${reservation.date}"></span>
+                        </div>
+
+                        <!-- Additional fields for customer and room selection (if needed) -->
+
+                        <button type="submit" class="btn btn-primary form-control w-50">Ajouter</button>
+                    </form>
                 </div>
-                <div class="mb-3">
-                    <label for="endDate" class="form-label">End Date</label>
-                    <input type="date" class="form-control w-50" id="endDate" name="endDate">
-                    <span class="text-danger" th:errors="${reservation.endDate}"></span>
-                </div>
-                <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control w-50" id="name" name="name">
-                    <span class="text-danger" th:errors="${reservation.name}"></span>
-                </div>
-                <div class="mb-3">
-                    <label for="date" class="form-label">Date</label>
-                    <input type="date" class="form-control w-50" id="date" name="date">
-                    <span class="text-danger" th:errors="${reservation.date}"></span>
-                </div>
-                <!-- Include fields for Customer and Room selection -->
-                <!-- Example: -->
-                <!-- <div class="mb-3">
-                    <label for="customerId" class="form-label">Customer</label>
-                    <select class="form-select w-50" id="customerId" name="customerId">
-                        <option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer.name}"></option>
-                    </select>
-                </div> -->
-                <!-- <div class="mb-3">
-                    <label for="roomId" class="form-label">Room</label>
-                    <select class="form-select w-50" id="roomId" name="roomId">
-                        <option th:each="room : ${rooms}" th:value="${room.id}" th:text="${room.name}"></option>
-                    </select>
-                </div> -->
-                <button type="submit" class="btn btn-primary form-control w-50">Ajouter</button>
-            </form>
+            </div>
         </div>
     </div>
 </div>

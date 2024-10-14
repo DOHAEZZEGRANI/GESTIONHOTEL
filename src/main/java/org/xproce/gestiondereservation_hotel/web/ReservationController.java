@@ -27,14 +27,34 @@ public class ReservationController {
     private RoomService roomService;
 
     @PostMapping("/savereservation")
-    public String ajouterreservation(Model model, @Valid Reservation reservation, BindingResult bindingResult) {
+    public String ajouterReservation(Model model,
+                                     @Valid Reservation reservation,
+                                     BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("reservation", reservation);
             return "ajouterreservation";
         }
+
+        // Ajouter la réservation
         reservationService.addReservation(reservation);
+
+        // Mettre à jour la disponibilité de la chambre
+        Room room = reservation.getRoom();
+        if (room != null) {
+            System.out.println("Chambre trouvée : " + room.getRoomNumber());
+            room.setAvailable(false); // Mettre à jour la disponibilité à false
+            roomService.updateRoom(room); // Sauvegarder la mise à jour
+
+            // Vérification si la mise à jour est bien effectuée
+            Room updatedRoom = roomService.getRoomById(room.getId());
+            System.out.println("Disponibilité de la chambre après mise à jour : " + updatedRoom.isAvailable());
+        } else {
+            System.out.println("Chambre non trouvée pour la réservation.");
+        }
+
         return "redirect:/listreservation";
     }
+
 
     @PostMapping("/submitReservation")
     public String submitReservation(@Valid @ModelAttribute("reservation") Reservation reservation, BindingResult result, Model model) {

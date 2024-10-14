@@ -6,83 +6,123 @@
     <meta charset="utf-8"/>
     <title>Room List</title>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css"/>
-    <script src="/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>  <style>
-    body {
-        background-color: #e9f4fb; /* Fond bleu clair doux */
-        font-family: 'Arial', sans-serif; /* Utilisation d'une police de caractères courante */
-        padding-top: 20px; /* Espace en haut de la page */
-    }
+    <script src="/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <style>
+        /* Background setup */
+        body {
+            background-image: url('https://wallpapercave.com/wp/wp2888506.jpg');
+            background-size: cover;
+            background-position: center;
+            font-family: 'Arial', sans-serif;
+            padding-top: 20px;
+        }
 
-    .container {
-        border: 1px solid #d1e3f1; /* Bordure bleu clair */
-        border-radius: 10px; /* Coins arrondis */
-        padding: 20px; /* Espacement à l'intérieur du conteneur */
-        background-color: #fff; /* Fond blanc */
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
-    }
+        .container {
+            border-radius: 10px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.85); /* Slightly transparent background */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
 
-    h1 {
-        color: #5a5a5a; /* Couleur de titre gris foncé */
-        text-align: center; /* Centrer le titre */
-        margin-bottom: 20px; /* Espace en bas du titre */
-    }
+        h1 {
+            color: #343a40;
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-    .btn-primary {
-        background-color: #007bff; /* Couleur de fond de bouton bleu */
-        border-color: #007bff; /* Couleur de bordure identique à la couleur de fond */
-    }
+        /* Table Design */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 15px;
+            color: #343a40;
+        }
 
-    .btn-primary:hover {
-        background-color: #0056b3; /* Couleur de fond de bouton bleu plus foncé au survol */
-        border-color: #0056b3; /* Couleur de bordure identique à la couleur de fond */
-    }
+        th {
+            background-color: #28a745;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 10px;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+        }
 
-    .btn-outline-primary {
-        color: #007bff; /* Couleur de texte bleu */
-        border-color: #007bff; /* Couleur de bordure bleu */
-    }
+        td {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            text-align: center;
+            border: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
 
-    .btn-outline-primary:hover {
-        background-color: #007bff; /* Couleur de fond bleu au survol */
-        color: #fff; /* Couleur de texte blanc au survol */
-    }
+        tr {
+            transition: transform 0.2s ease;
+            cursor: pointer;
+        }
 
-    table {
-        border-collapse: collapse; /* Fusionner les bordures de table */
-        width: 100%; /* Largeur de la table */
-    }
+        /* Hover effect for rows */
+        tr:hover {
+            transform: scale(1.02);
+            background-color: rgba(240, 240, 240, 0.9);
+        }
 
-    th, td {
-        border: 1px solid #d1e3f1; /* Bordures des cellules bleu clair */
-        padding: 8px; /* Espacement à l'intérieur des cellules */
-        text-align: left; /* Alignement du texte à gauche */
-    }
+        /* Making rows clickable */
+        tr a {
+            display: block;
+            color: inherit;
+            text-decoration: none;
+            height: 100%;
+            width: 100%;
+        }
 
-    th {
-        background-color: #007bff; /* Fond de cellule bleu pour les en-têtes */
-        color: #fff; /* Texte blanc pour les en-têtes */
-    }
+        /* Pagination pills styling */
+        .nav-pills .nav-link {
+            margin: 5px;
+            border-radius: 20px;
+            color: brown;
+            background-color: #f8f9fa;
+            border: 1px solid brown;
+        }
 
-    tr:nth-child(even) {
-        background-color: #f1f9ff; /* Fond de ligne bleu très clair pour les lignes paires */
-    }
+        .nav-pills .nav-link.active {
+            background-color: #28a745;
+            color: #fff;
+            border-color: #28a745;
+        }
 
-    tr:nth-child(odd) {
-        background-color: #fff; /* Fond de ligne blanc pour les lignes impaires */
-    }
+        .btn-primary {
+            background-color: brown;
+            border-color: brown;
+        }
 
-    .nav-pills .nav-link {
-        margin: 5px; /* Espace entre les liens de navigation */
-    }
-</style>
+        .btn-primary:hover {
+            background-color: darkred;
+            border-color: darkred;
+        }
+    </style>
+    <script>
+        // Make the whole row clickable
+        document.addEventListener('DOMContentLoaded', function () {
+            const rows = document.querySelectorAll('table tbody tr');
+            rows.forEach(row => {
+                row.addEventListener('click', function () {
+                    const link = this.querySelector('a');
+                    if (link) {
+                        window.location.href = link.href;
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 <body>
 <div layout:fragment="content">
     <div class="d-flex justify-content-center mb-4">
         <form method="get" th:action="@{/listroom}" class="d-flex">
-
-                <input type="text" name="search" class="form-control me-2" th:value="${keyword}" placeholder="Rechercher un room"/>
-
+            <input type="text" name="search" class="form-control me-2" th:value="${keyword}" placeholder="Search for a room"/>
             <button class="btn btn-primary" type="submit">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                      class="bi bi-search" viewBox="0 0 16 16">
@@ -92,7 +132,7 @@
         </form>
     </div>
     <div class="container">
-        <h1>Liste Des Room</h1>
+        <h1>Room List</h1>
         <table class="table">
             <thead>
             <tr>
@@ -101,7 +141,6 @@
                 <th>Available</th>
                 <th>Description</th>
                 <th>Room Type</th>
-
             </tr>
             </thead>
             <tbody>
@@ -118,15 +157,14 @@
         <div class="d-flex justify-content-center mt-4">
             <ul class="nav nav-pills">
                 <li class="nav-item" th:each="p, stat: ${pages}">
-                    <a  th:classappend="${stat.index == page} ? 'active' : ''"
-                        class="nav-link"
-                        th:text="${stat.index}"
-                        th:href="@{listroom(page=${stat.index},search=${keyword})}"></a>
+                    <a th:classappend="${stat.index == page} ? 'active' : ''"
+                       class="nav-link"
+                       th:text="${stat.index}"
+                       th:href="@{listroom(page=${stat.index},search=${keyword})}"></a>
                 </li>
             </ul>
         </div>
     </div>
 </div>
-
 </body>
 </html>

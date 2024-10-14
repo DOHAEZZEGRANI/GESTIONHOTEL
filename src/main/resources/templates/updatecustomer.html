@@ -1,58 +1,63 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.com" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>Modifier un client</title>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css">
     <script src="webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
     <style>
         body {
-            background-color: #f3f3f3;
-            font-family: Arial, sans-serif;
+            background-image: url('https://wallpapercave.com/wp/wp2888506.jpg'); /* Image de fond */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+            color: white;
         }
 
         .container {
-            background-color: #fff;
+            background-color: rgba(0, 0, 0, 0.7); /* Fond transparent noir */
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             padding: 20px;
-            margin: 50px auto;
             max-width: 500px;
+            width: 100%;
         }
 
         h2 {
-            color: #ff85a2;
+            color: #ffffff; /* Couleur du texte du titre */
             text-align: center;
+            margin-bottom: 20px;
         }
 
         .form-label {
-            color: #ff85a2;
+            color: #f3f3f3; /* Couleur des étiquettes */
         }
 
         .form-control {
-            border-color: #ff85a2;
+            border-color: #f3f3f3; /* Couleur des bordures des champs de formulaire */
         }
 
         .form-control:focus {
-            border-color: #ff6188;
-            box-shadow: 0 0 5px rgba(255, 133, 162, 0.5);
-        }
-
-        .form-check-input:checked {
-            background-color: #ff85a2;
-            border-color: #ff85a2;
+            border-color: #ffffff; /* Couleur de la bordure au focus */
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Ombre au focus */
         }
 
         .btn-primary {
-            background-color: #ff85a2;
-            border-color: #ff85a2;
+            background-color: #f52222; /* Couleur de fond des boutons */
+            border-color: #f52222; /* Couleur des bordures des boutons */
+            width: 100%;
         }
 
         .btn-primary:hover {
-            background-color: #ff6188;
-            border-color: #ff6188;
+            background-color: #0056b3; /* Couleur de fond des boutons au survol */
+            border-color: #0056b3; /* Couleur des bordures des boutons au survol */
         }
-
     </style>
 </head>
 <body>
@@ -62,11 +67,11 @@
         <form action="/ajouter" method="post">
             <input type="hidden" name="id" th:value="${CustomerToBeUpdated.id}">
             <div class="mb-3">
-                <label for="name" class="form-label">Name:</label>
+                <label for="name" class="form-label">Nom:</label>
                 <input type="text" class="form-control" id="name" name="name" th:value="${CustomerToBeUpdated.name}">
             </div>
             <div class="mb-3">
-                <label for="phone" class="form-label">Phone:</label>
+                <label for="phone" class="form-label">Téléphone:</label>
                 <input type="text" class="form-control" id="phone" name="phone" th:value="${CustomerToBeUpdated.phone}">
             </div>
             <div class="mb-3">

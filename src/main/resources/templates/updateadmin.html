@@ -8,79 +8,88 @@
     <script src="webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
 
     <style>
+        /* Full-screen background */
         body {
-            background-color: #f3f3f3;
+            background-image: url('https://wallpapercave.com/wp/wp2888506.jpg'); /* Replace with your image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             font-family: Arial, sans-serif;
+            color: white;
         }
 
         .container {
-            background-color: #fff;
+            background-color: rgba(0, 0, 0, 0.7); /* Transparent black background */
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             padding: 20px;
-            margin: 50px auto;
             max-width: 500px;
+            width: 100%;
         }
 
         h2 {
-            color: #ff85a2;
+            color: #ffffff;
             text-align: center;
         }
 
         .form-label {
-            color: #ff85a2;
+            color: #ffffff;
         }
 
         .form-control {
-            border-color: #ff85a2;
+            border-color: #ffffff;
         }
 
         .form-control:focus {
-            border-color: #ff6188;
+            border-color: #ffffff;
             box-shadow: 0 0 5px rgba(255, 133, 162, 0.5);
         }
 
         .form-check-input:checked {
-            background-color: #ff85a2;
+            background-color: #ffffff;
             border-color: #ff85a2;
         }
 
         .btn-primary {
-            background-color: #ff85a2;
-            border-color: #ff85a2;
+            background-color: #f52222;
+            border-color: #f52222;
         }
 
         .btn-primary:hover {
             background-color: #ff6188;
             border-color: #ff6188;
         }
-
     </style>
 </head>
 
 <body>
-<div layout:fragment="content" >
-    <div class="container mt-4">
-    <h2 class="text-center mb-4">Edit Admin</h2>
+<div layout:fragment="content">
+    <div class="container">
+        <h2 class="text-center mb-4">Edit Admin</h2>
 
-            <form action="/ajouterr" method="post">
-                <input type="hidden" name="id" th:value="${AdminToBeUpdated.id}">
-                <div class="mb-3">
-                    <label for="name" class="form-label">Name:</label>
-                    <input type="text" class="form-control" id="name" name="name" th:value="${AdminToBeUpdated.name}">
-                </div>
-                <div class="mb-3">
-                    <label for="phone" class="form-label">Phone:</label>
-                    <input type="text" class="form-control" id="phone" name="phone" th:value="${AdminToBeUpdated.phone}">
-                </div>
-                <div class="mb-3">
-                    <label for="description" class="form-label">Description:</label>
-                    <input type="text" class="form-control" id="description" name="description" th:value="${AdminToBeUpdated.description}">
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Modifier</button>
-            </form>
-        </div>
+        <form action="/ajouterr" method="post">
+            <input type="hidden" name="id" th:value="${AdminToBeUpdated.id}">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" th:value="${AdminToBeUpdated.name}">
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone:</label>
+                <input type="text" class="form-control" id="phone" name="phone" th:value="${AdminToBeUpdated.phone}">
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description:</label>
+                <input type="text" class="form-control" id="description" name="description" th:value="${AdminToBeUpdated.description}">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Modifier</button>
+        </form>
     </div>
+</div>
 
 </body>
 

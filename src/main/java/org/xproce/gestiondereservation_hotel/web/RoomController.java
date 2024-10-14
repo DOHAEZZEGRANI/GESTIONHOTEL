@@ -103,39 +103,36 @@ public class RoomController {
         }
     }
     @PostMapping("/modifierroom")
-    public String modifierRoomAction(Model model,@RequestParam(name = "id") Hotel hotel,
+    public String modifierRoomAction(Model model,
+                                     @RequestParam(name = "hotel_id") Integer hotelId, // Correction ici, hotel_id doit être de type Integer
                                      @RequestParam(name = "id") Integer id,
                                      @RequestParam(name = "roomNum") String roomNum,
                                      @RequestParam(name = "price") Double price,
                                      @RequestParam(name = "imageUrl") String imageUrl,
                                      @RequestParam(name = "description") String description,
                                      @RequestParam(name = "available", defaultValue = "false") boolean available,
-                                     @RequestParam(name = "roomType") String roomType){
+                                     @RequestParam(name = "roomType") String roomType) {
 
         Room room = roomService.getRoomById(id);
-        if (room != null) {
-            // Mettre à jour les champs modifiables avec les nouvelles valeurs
+        Hotel hotel = hotelService.getHotelById(hotelId); // Récupération de l'hôtel par son id
+
+        if (room != null && hotel != null) {
             room.setRoomNumber(roomNum);
             room.setPricePerNight(price);
             room.setDescription(description);
             room.setImageUrl(imageUrl);
             room.setAvailable(available);
-            room.setHotel(hotel);
-
-
-            hotel.getRooms().add(room);
-
-
-
             room.setRoomType(roomType);
+            room.setHotel(hotel); // Assigner l'hôtel à la chambre
+            roomService.updateRoom(room); // Mise à jour de la chambre
 
-            hotelService.updateHotel(hotel);
-            roomService.updateRoom(room);
             return "redirect:/listroom";
         } else {
-            return "error";
+            return "error"; // Gestion d'erreur si la chambre ou l'hôtel est introuvable
         }
     }
 
-
 }
+
+
+

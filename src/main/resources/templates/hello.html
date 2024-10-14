@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DU-STOCK</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Keyframe animation for changing the background image */
+        @keyframes backgroundChange {
+            0% { background-image: url('https://media.architecturaldigest.com/photos/5df8fa6697b883000883d2e5/master/w_1600%2Cc_limit/3.%2520Inside%2520a%2520bungalow%2520at%2520Kisawa%2520that%2520opens%2520on%2520an%2520island%2520off%2520the%2520coast%2520of%2520Mozambique%2520-%2520credit%2520Kisawa.jpg'); }
+            33% { background-image: url('https://www.travelplusstyle.com/wp-content/uploads/2022/12/Nujama-Beach-Villa-3-scaled-1.jpg'); }
+            66% { background-image: url('https://media.architecturaldigest.com/photos/5df8f81997b883000883d2e1/16:9/w_2000,h_1125,c_limit/3a.%20A%20bungalow%20at%20Kisawa%20that%20opens%20on%20an%20island%20off%20the%20coast%20of%20Mozambique%20-%20credit%20Kisawa.jpg'); }
+            100% { background-image: url('https://media.architecturaldigest.com/photos/5df8fa6697b883000883d2e5/master/w_1600%2Cc_limit/3.%2520Inside%2520a%2520bungalow%2520at%2520Kisawa%2520that%2520opens%2520on%2520an%2520island%2520off%2520the%2520coast%2520of%2520Mozambique%2520-%2520credit%2520Kisawa.jpg'); }
+        }
+
+        /* Applying the animation to the hero section */
+        .hero-section {
+            animation: backgroundChange 15s infinite; /* Change background every 15s */
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+<!-- Navbar -->
+
+
+<!-- Hero Section with Alternating Background -->
+<section class="hero-section h-screen flex items-center justify-center text-white bg-black bg-opacity-50">
+    <div class="text-center">
+        <h1 class="text-5xl font-bold mb-4">Welcome to FUDU-HOTEL</h1>
+        <p class="text-lg mb-8">reservation des hotel</p>
+        <div class="flex justify-center gap-4">
+            <button onclick="window.location.href='indexpage'" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg">
+                Get Started
+            </button>
+            <a href="about" class="text-blue-300 hover:text-blue-400 underline">Learn more →</a>
+        </div>
+    </div>
+</section>
+
+
+
+</body>
+</html>

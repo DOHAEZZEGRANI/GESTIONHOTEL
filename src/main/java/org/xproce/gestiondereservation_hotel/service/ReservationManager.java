@@ -1,8 +1,6 @@
 package org.xproce.gestiondereservation_hotel.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.xproce.gestiondereservation_hotel.Dao.entities.Reservation;
 
@@ -15,6 +13,9 @@ public class ReservationManager implements ReservationService{
     @Autowired
     private ReservationRepository reservationRepository;
 
+
+
+
     @Override
     public List<Reservation> getAllReservation() {
         try {
@@ -25,6 +26,7 @@ public class ReservationManager implements ReservationService{
             return null;
         }
     }
+
 
     @Override
     public Reservation addReservation(Reservation reservation) {
@@ -88,10 +90,11 @@ public class ReservationManager implements ReservationService{
         }
     }
 
+
     @Override
     public List<Reservation> searchReservation() {
         return reservationRepository.findAll();
-    }
+    }}
 
-}
+
 

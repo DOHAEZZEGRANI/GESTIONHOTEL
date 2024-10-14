@@ -13,6 +13,5 @@ public interface ReclamationService {
     Boolean deleteReclamation(Reclamation reclamation);
     Reclamation getReclamationById(Integer id);
     Boolean deleteReclamationById(Integer id);
-
     Page<Reclamation> searchReclamation(String keyword, int page, int taille);
 }
